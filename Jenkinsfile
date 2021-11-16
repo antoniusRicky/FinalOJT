@@ -7,9 +7,9 @@ pipeline {
                 checkout scm
             }
         }
-        stage('install') {
+        stage('build') {
             steps {
-                bat "mvn install"
+                bat "mvn clean package -Dmaven.test.skip=true"
             }
         }
     }
