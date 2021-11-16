@@ -47,7 +47,7 @@ public class Main {
 		currUser = "";
 		currPwd = "";
 		currRole = "";
-		
+	
 		// datas
 		listData();
 		
@@ -148,7 +148,7 @@ public class Main {
 				int stockTemp = Integer.parseInt(splitAt[4]);
 				books.put(splitAt[0], new Book(splitAt[0], splitAt[1], splitAt[2], splitAt[3], stockTemp));
 			}
-			
+		
 			fr.close();
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
@@ -215,7 +215,7 @@ public class Main {
 		}
 	}
 	
-	public void updateText() {
+	public static void updateText() {
 		// user
 		updateUser();
 		
@@ -229,7 +229,7 @@ public class Main {
 		updateRoles();
 	}
 	
-	public void updateUser() {
+	public static void updateUser() {
 		try {
 			File usersF = new File("src/datas/user.txt");
 			FileWriter fw = new FileWriter(usersF);
@@ -248,8 +248,9 @@ public class Main {
 		}
 	}
 	
-	public void updateBooks() {
+	public static void updateBooks() {
 		try {
+			
 			File booksF = new File("src/datas/books.txt");
 			FileWriter fw = new FileWriter(booksF);
 			String updatedBooks = "";
@@ -267,7 +268,7 @@ public class Main {
 		}
 	}
 
-	public void updateStatus() {
+	public static void updateStatus() {
 		try {
 			File statusF = new File("src/datas/status.txt");
 			FileWriter fw = new FileWriter(statusF);
@@ -286,7 +287,7 @@ public class Main {
 		}
 	}
 	
-	public void updateRoles() {
+	public static void updateRoles() {
 		try {
 			File roleF = new File("src/datas/roles.txt");
 			FileWriter fw = new FileWriter(roleF);

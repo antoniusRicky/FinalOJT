@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
@@ -20,8 +22,11 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import handler.BookHandler;
+import handler.BorrowHandler;
+import handler.StatusHandler;
 import main.Main;
 import model.Book;
+import model.Status;
 import model.User;
 
 public class MainMenuCustomer extends JFrame implements ActionListener {
@@ -37,6 +42,8 @@ public class MainMenuCustomer extends JFrame implements ActionListener {
 	
 	private JDesktopPane pane;
 	private BookHandler hBook;
+	private StatusHandler hStat;
+	private BorrowHandler hBorr;
 	
 	private JOptionPane errorLogin;
 	
@@ -91,10 +98,12 @@ public class MainMenuCustomer extends JFrame implements ActionListener {
 		logout = new JButton("Logout");
 		exit = new JButton("Exit");
 		
-//		panel.add(new JPanel());
 		panel.add(logout);
+		panel.add(new JPanel());
+		panel.add(new JPanel());
+		panel.add(new JPanel());
+		panel.add(new JPanel());
 		panel.add(exit);
-//		panel.add(new JPanel());
 		
 		return panel;
 	}
@@ -137,15 +146,48 @@ public class MainMenuCustomer extends JFrame implements ActionListener {
 		    add(panel);
 		}
 		else if (e.getSource() == borrow){
+			List<Book> listbook = new ArrayList<Book>();
+			// get all list book
+			for (Map.Entry<String, Book> bb : Main.getBooks().entrySet()) {
+				listbook.add(bb.getValue());
+			}
 			
+			pane = new JDesktopPane();
+			hBorr = new BorrowHandler();
+			JInternalFrame frame = hBorr.showViewBookForm(listbook);
+			pane.add(frame);
+		    setContentPane(pane);
+		    add(panel);
 		}
 		else if (e.getSource() == returns){
+			List<Status> returnlistbook = new ArrayList<Status>();
+			for (Map.Entry<String, Status> ss : Main.getStatus().entrySet()) {
+				String temp = ss.getValue().getBorrower();
+				if(temp.equals(Main.currUser)) {
+					returnlistbook.add(ss.getValue());					
+				}
+			}
 			
+			if (returnlistbook.isEmpty()) {
+				errorLogin = new JOptionPane();
+				errorLogin.showMessageDialog(null, "No Book to Return","Alert",JOptionPane.WARNING_MESSAGE); 
+			}
+			else {
+				pane = new JDesktopPane();
+				hStat = new StatusHandler();
+				JInternalFrame frame = hStat.showViewBookForm(returnlistbook);
+				pane.add(frame);
+				setContentPane(pane);
+				add(panel);				
+			}
 		}
 		else if (e.getSource() == logout){
-			
+			Main.updateText();
+			dispose();
+			Main.main(null);
 		}
 		else {
+			Main.updateText();
 			dispose();
 		}
 		

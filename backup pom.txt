@@ -3,6 +3,9 @@
   <groupId>Testing</groupId>
   <artifactId>Testing</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+  <packaging>war</packaging>
+  <name>MYAPPS</name>
+  <description>Project Application</description>
   <build>
     <sourceDirectory>src</sourceDirectory>
     <resources>
@@ -22,7 +25,7 @@
         </configuration>
       </plugin>
       <plugin>
-      	<artifactId>maven-jar-plugin</artifactId>
+        <artifactId>maven-jar-plugin</artifactId>
       	<version>3.2.0</version>
       	<configuration>
       		<archive>
@@ -32,6 +35,11 @@
       			</manifest>
       		</archive>
       	</configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+  	    <artifactId>maven-war-plugin</artifactId>
+        <version>2.2</version>
       </plugin>
     </plugins>
   </build>

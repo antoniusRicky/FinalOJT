@@ -1,11 +1,14 @@
 package gui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -51,16 +54,20 @@ public class LoginMenu extends JFrame implements ActionListener{
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setResizable(true);
 		setLocationRelativeTo(null);
+		this.getContentPane().setBackground(Color.BLUE);
 		
+//		Image img = Toolkit.getDefaultToolkit().getImage("C:\\Users\\u542932\\Downloads\\bca.png");
+		
+		panel = fullPanel(gridId(), gridPassword(), gridStartRegister());
+		add(panel);
 //		try {
-//			add(new JPanelWithBackground("/Users/u542932/Downloads/bca.png"));
+//			add(new JPanelWithBackground("C:\\Users\\u542932\\Downloads\\bca.png"));
 //		} catch (IOException e) {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
-		panel = fullPanel(gridId(), gridPassword(), gridStartRegister());
-		add(panel);
 		
+//		JLabel background=new JLabel(new ImageIcon("C:\\Users\\u542932\\Downloads\\bca.png"));
 		setVisible(true);
 	}
 	
